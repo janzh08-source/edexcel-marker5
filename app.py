@@ -4,7 +4,7 @@ import google.generativeai as genai
 # Set up the Gemini API
 api_key = st.secrets["GOOGLE_API_KEY"]
 genai.configure(api_key=api_key)
-model = genai.GenerativeModel('gemini-1.5-flash')
+model = genai.[span_3](start_span)GenerativeModel('gemini-2.0-flash')
 
 st.title("Edexcel AI Marker")
 subject = st.selectbox("Select Subject", ["Maths", "English"])
