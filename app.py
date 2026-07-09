@@ -22,10 +22,26 @@ if st.button("Grade My Work"):
         prompt = f"You are an expert Edexcel examiner. Grade the following {subject} answer. Provide feedback on correctness, highlight any errors, and suggest improvements based on Edexcel marking criteria. Answer: {student_answer}"
         
         try:
+        import time # Add this at the very top of your file
+
+# ... (rest of your code)
+
+        try:
             # Generate the response
+            # We add a small delay to be safe
+            time.sleep(1) 
             response = model.generate_content(prompt)
             st.write("### Feedback:")
             st.write(response.text)
+        except Exception as e:
+            if "429" in str(e):
+                st.warning("The AI is a bit busy. Retrying in 5 seconds...")
+                time.sleep(5)
+                response = model.generate_content(prompt)
+                st.write("### Feedback:")
+                st.write(response.text)
+            else:
+                st.error(f"An error occurred: {e}")
         except Exception as e:
             st.error(f"An error occurred: {e}")
     else:
